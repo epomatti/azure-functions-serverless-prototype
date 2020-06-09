@@ -34,20 +34,26 @@ resource "azurerm_cosmosdb_mongo_database" "default" {
   throughput          = 400
 }
 
-resource "azurerm_cosmosdb_sql_container" "questions" {
+resource "azurerm_cosmosdb_mongo_collection" "questions" {
   name                = "questions"
   resource_group_name = azurerm_resource_group.rg.name
   account_name        = azurerm_cosmosdb_account.default.name
   database_name       = azurerm_cosmosdb_mongo_database.default.name
-  partition_key_path  = "product"
+
+  default_ttl_seconds = "-1"
+  shard_key           = "product"
+  throughput          = 400
 }
 
-resource "azurerm_cosmosdb_sql_container" "answers" {
+resource "azurerm_cosmosdb_mongo_collection" "answers" {
   name                = "answers"
   resource_group_name = azurerm_resource_group.rg.name
   account_name        = azurerm_cosmosdb_account.default.name
   database_name       = azurerm_cosmosdb_mongo_database.default.name
-  partition_key_path  = "address.zip"
+
+  default_ttl_seconds = "-1"
+  shard_key           = "address.zipcode"
+  throughput          = 400
 }
 
 output "cosmosdb_connection_strings" {
