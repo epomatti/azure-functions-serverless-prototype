@@ -28,5 +28,5 @@ resource "azurerm_cosmosdb_account" "db" {
 }
 
 output "cosmosdb_connection_strings" {
-  value = aws_instance.server.connection_strings
+  value = azurerm_cosmosdb_account.db.connection_strings
 }
