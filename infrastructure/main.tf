@@ -17,7 +17,7 @@ resource "azurerm_cosmosdb_account" "db" {
   enable_automatic_failover = false
 
   consistency_policy {
-    consistency_level = "Sesssion"
+    consistency_level = "Session"
   }
 
   geo_location {
