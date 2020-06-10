@@ -21,6 +21,13 @@ Post answers
 curl --data "@shared_code/answers.json" http://localhost:7071/api/PostAnswers
 ```
 
+Get anwers
+
+```sh
+curl http://localhost:7071/api/GetAnswers?id=participant@mail.com
+```
+
+
 Must read: [Azure Functions Python developer guide](https://docs.microsoft.com/en-us/azure/azure-functions/functions-reference-python)
 
 Other sources
