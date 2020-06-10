@@ -95,12 +95,13 @@ resource "azurerm_app_service_plan" "default" {
 }
 
 resource "azurerm_function_app" "maibeer" {
-  name                      = "func-maibeer-prototype"
-  location                  = azurerm_resource_group.rg.location
-  resource_group_name       = azurerm_resource_group.rg.name
-  app_service_plan_id       = azurerm_app_service_plan.default.id
-  storage_account_name   = azurerm_storage_account.default.name
-  os_type                   = "linux"
+  name                       = "func-maibeer-prototype"
+  location                   = azurerm_resource_group.rg.location
+  resource_group_name        = azurerm_resource_group.rg.name
+  app_service_plan_id        = azurerm_app_service_plan.default.id
+  storage_account_name       = azurerm_storage_account.default.name
+  storage_account_access_key = azurerm_storage_account.default.primary_access_key
+  os_type                    = "linux"
 }
 
 # KEYVAULT
