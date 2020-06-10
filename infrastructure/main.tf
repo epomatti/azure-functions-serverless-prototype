@@ -155,7 +155,9 @@ resource "azurerm_key_vault_access_policy" "function" {
   object_id = azurerm_function_app.maibeer.identity[0].principal_id
 
   key_permissions = [
-    "get"
+    "get",
+    "decrypt",
+    "encrypt"
   ]
 }
 

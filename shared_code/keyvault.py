@@ -8,8 +8,9 @@ def encrypt(text):
     credential = DefaultAzureCredential()
     key_client = KeyClient(vault_url=uri, credential=credential)
 
-    key = key_client.get_key("managed-key")
+    key = key_client.get_key("generated-key")
     crypto_client = CryptographyClient(key, credential=credential)
     plaintext = text.encode()
 
-    return crypto_client.encrypt(EncryptionAlgorithm.rsa_oaep, plaintext)
+    result = crypto_client.encrypt(EncryptionAlgorithm.rsa_oaep, plaintext)
+    return result.ciphertext
