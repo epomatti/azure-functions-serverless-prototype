@@ -136,7 +136,7 @@ resource "azurerm_key_vault_key" "generated" {
 
   key_opts = [
     "decrypt",
-    "encrypt"
+    "encrypt",
 }
 
 resource "azurerm_key_vault_access_policy" "function" {
