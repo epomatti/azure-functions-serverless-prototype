@@ -152,7 +152,7 @@ resource "azurerm_key_vault_access_policy" "function" {
   key_vault_id = azurerm_key_vault.prototype.id
 
   tenant_id = data.azurerm_client_config.current.tenant_id
-  object_id = azurerm_function_app.maibeer.principal_id
+  object_id = azurerm_function_app.maibeer.identity.principal_id
 
   key_permissions = [
     "get"
