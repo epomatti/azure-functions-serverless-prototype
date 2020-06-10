@@ -54,6 +54,11 @@ resource "azurerm_cosmosdb_mongo_collection" "answers" {
   default_ttl_seconds = "0"
   shard_key           = "address.zipcode"
   throughput          = 400
+
+  depends_on = [
+    azurerm_cosmosdb_mongo_collection.answers
+  ]
+
 }
 
 output "cosmosdb_connection_strings" {
