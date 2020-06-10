@@ -3,7 +3,7 @@
   "Values": {
     "FUNCTIONS_WORKER_RUNTIME": "python",
     "AzureWebJobsStorage": "{AzureWebJobsStorage}",
-    "COSMOSDB_CONNECTION_STRING": "<CONNECTION_STRING>",
+    "COSMOSDB_CONNECTION_STRING": "",
     "KEYVAULT_URI": "",
     "AZURE_TENANT_ID": "",
     "AZURE_CLIENT_ID": "",

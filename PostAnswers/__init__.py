@@ -11,6 +11,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     # encrypt
     safe_email = keyvault.encrypt(obj["email"])
     print(safe_email)
-    obj["_id"] = "####"
+    plain_email = keyvault.decrypt(safe_email)
+    print(plain_email)
     # send to mongo
     return func.HttpResponse(f"Hello!")
