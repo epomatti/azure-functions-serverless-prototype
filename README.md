@@ -22,3 +22,9 @@ curl --data "@shared_code/answers.json" http://localhost:7071/api/PostAnswers
 ```
 
 Must read: [Azure Functions Python developer guide](https://docs.microsoft.com/en-us/azure/azure-functions/functions-reference-python)
+
+Other sources
+
+[azure-keyvault-keys](https://pypi.org/project/azure-keyvault-keys/)
+
+[azure-identity](https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/identity/azure-identity)

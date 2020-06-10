@@ -13,6 +13,7 @@ resource "azurerm_resource_group" "rg" {
   location = "brazilsouth"
 }
 
+# COSMOS
 
 resource "azurerm_cosmosdb_account" "default" {
   name                = "cosmos-maibeer-prototype"
@@ -68,6 +69,42 @@ resource "azurerm_cosmosdb_mongo_collection" "answers" {
 
 }
 
+# STORAGE
+
+resource "azurerm_storage_account" "default" {
+  name                     = "stmaibeerprototype001"
+  location                 = azurerm_resource_group.rg.location
+  resource_group_name      = azurerm_resource_group.rg.name
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+}
+
+# FUNCTIONS
+
+resource "azurerm_app_service_plan" "default" {
+  name                = "plan-maibeer-prototype"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  kind                = "FunctionApp"
+  reserved            = true
+
+  sku {
+    tier = "Dynamic"
+    size = "Y1"
+  }
+}
+
+resource "azurerm_function_app" "example" {
+  name                      = "func-maibeer-prototype"
+  location                  = azurerm_resource_group.rg.location
+  resource_group_name       = azurerm_resource_group.rg.name
+  app_service_plan_id       = azurerm_app_service_plan.default.id
+  storage_connection_string = azurerm_storage_account.default.primary_connection_string
+  os_type                   = "linux"
+}
+
+# KEYVAULT
+
 resource "azurerm_key_vault" "prototype" {
   name                        = "kv-maibeer-prototype"
   location                    = azurerm_resource_group.rg.location
@@ -79,14 +116,14 @@ resource "azurerm_key_vault" "prototype" {
 
   sku_name = "standard"
 
-  # access_policy {
-  #   tenant_id = data.azurerm_client_config.current.tenant_id
-  #   object_id = data.azurerm_client_config.current.object_id
+  access_policy {
+    tenant_id = data.azurerm_client_config.current.tenant_id
+    object_id = data.azurerm_client_config.current.object_id
 
-  #   key_permissions = [
-  #     "get",
-  #   ]
-  # }
+    key_permissions = [
+      "get", 
+    ]
+  }
 
   network_acls {
     default_action = "Allow"
@@ -94,6 +131,8 @@ resource "azurerm_key_vault" "prototype" {
   }
 
 }
+
+# OUTPUTS
 
 output "cosmosdb_connection_strings" {
   value = azurerm_cosmosdb_account.default.connection_strings
