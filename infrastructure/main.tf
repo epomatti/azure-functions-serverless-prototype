@@ -102,6 +102,10 @@ resource "azurerm_function_app" "maibeer" {
   storage_account_name       = azurerm_storage_account.default.name
   storage_account_access_key = azurerm_storage_account.default.primary_access_key
   os_type                    = "linux"
+
+  identity {
+    type                     = "SystemAssigned"
+  }
 }
 
 # KEYVAULT
@@ -117,20 +121,33 @@ resource "azurerm_key_vault" "prototype" {
 
   sku_name = "standard"
 
-  access_policy {
-    tenant_id = data.azurerm_client_config.current.tenant_id
-    object_id = data.azurerm_client_config.current.object_id
-
-    key_permissions = [
-      "get", 
-    ]
-  }
-
   network_acls {
     default_action = "Allow"
     bypass         = "AzureServices"
   }
 
+}
+
+resource "azurerm_key_vault_key" "generated" {
+  name         = "generated-certificate"
+  key_vault_id = azurerm_key_vault.prototype.id
+  key_type     = "RSA"
+  key_size     = 2048
+
+  key_opts = [
+    "decrypt",
+    "encrypt"
+}
+
+resource "azurerm_key_vault_access_policy" "function" {
+  key_vault_id = azurerm_key_vault.prototype.id
+
+  tenant_id = data.azurerm_client_config.current.tenant_id
+  object_id = azurerm_function_app.maibeer.identity.principal_id
+
+  key_permissions = [
+    "get"
+  ]
 }
 
 # OUTPUTS
