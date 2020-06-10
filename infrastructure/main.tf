@@ -157,6 +157,6 @@ output "cosmosdb_connection_strings" {
   value = azurerm_cosmosdb_account.default.connection_strings
 }
 
-output "vault_uri" {
-  value = azurerm_key_vault.prototype.vault_uri
-}
+# output "vault_uri" {
+#   value = azurerm_key_vault.prototype.vault_uri
+# }
