@@ -135,7 +135,7 @@ resource "azurerm_key_vault" "prototype" {
 }
 
 resource "azurerm_key_vault_key" "generated" {
-  name         = "generated-certificate"
+  name         = "generated-key"
   key_vault_id = azurerm_key_vault.prototype.id
   key_type     = "RSA"
   key_size     = 2048
