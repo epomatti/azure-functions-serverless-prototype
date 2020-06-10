@@ -1,0 +1,25 @@
+{
+    "_id": "0",
+    "product": "maibeer",
+    "questions": {
+        "0": {
+            "text": "What is your preferred beer",
+            "type": "SingleChoice",
+            "answers": {
+                "0": "Budweiser",
+                "1": "Heineken",
+                "2": "Stella",
+                "3": "Becks"
+            }
+        },
+        "1": {
+            "text": "When do you drink beer",
+            "type": "MultipleChoice",
+            "answers": {
+                "0": "Morning",
+                "1": "Evening",
+                "2": "Night"
+            }
+        }
+    }
+}

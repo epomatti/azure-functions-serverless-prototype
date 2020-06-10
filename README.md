@@ -8,3 +8,5 @@ pip install -r requirements.txt
 
 func host start
 ```
+
+Must read: [Azure Functions Python developer guide](https://docs.microsoft.com/en-us/azure/azure-functions/functions-reference-python)
