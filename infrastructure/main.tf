@@ -45,16 +45,16 @@ resource "azurerm_cosmosdb_mongo_collection" "questions" {
   throughput          = 400
 }
 
-# resource "azurerm_cosmosdb_mongo_collection" "answers" {
-#   name                = "answers"
-#   resource_group_name = azurerm_resource_group.rg.name
-#   account_name        = azurerm_cosmosdb_account.default.name
-#   database_name       = azurerm_cosmosdb_mongo_database.default.name
+resource "azurerm_cosmosdb_mongo_collection" "answers" {
+  name                = "answers"
+  resource_group_name = azurerm_resource_group.rg.name
+  account_name        = azurerm_cosmosdb_account.default.name
+  database_name       = azurerm_cosmosdb_mongo_database.default.name
 
-#   default_ttl_seconds = "0"
-#   shard_key           = "address.zipcode"
-#   throughput          = 400
-# }
+  default_ttl_seconds = "0"
+  shard_key           = "address.zipcode"
+  throughput          = 400
+}
 
 output "cosmosdb_connection_strings" {
   value = azurerm_cosmosdb_account.default.connection_strings
