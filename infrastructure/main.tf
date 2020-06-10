@@ -122,6 +122,14 @@ resource "azurerm_key_vault" "prototype" {
     bypass         = "AzureServices"
   }
 
+  access_policy {
+    tenant_id = data.azurerm_client_config.current.tenant_id
+    object_id = data.azurerm_client_config.current.object_id
+
+    key_permissions = [
+      "create",
+    ]
+
 }
 
 resource "azurerm_key_vault_key" "generated" {
