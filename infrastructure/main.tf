@@ -129,6 +129,7 @@ resource "azurerm_key_vault" "prototype" {
     key_permissions = [
       "create",
     ]
+  }
 
 }
 
