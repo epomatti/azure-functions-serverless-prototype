@@ -1,5 +1,8 @@
 {
     "email": "participant@mail.com",
+    "address": {
+        "zipcode": "99999-999"
+    },
     "answers": {
         "0": "3",
         "1": "3"

@@ -1,6 +1,4 @@
-import os
 import azure.functions as func
-import pymongo
 from ..shared_code import mongo
 import json
 
