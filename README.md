@@ -1,5 +1,10 @@
 # mb-prototype
-Prototyping a modern serverless, segure and schemeless application.
+
+
+## Local develompent
+Required: [Azure Functions Core Tools](https://github.com/Azure/azure-functions-core-tools)
+
+Start the functions locally
 
 ```sh
 python3 -m venv .venv
@@ -27,10 +32,20 @@ Get anwers
 curl http://localhost:7071/api/GetAnswers?id=participant@mail.com
 ```
 
+## Infrastructure
 
-Must read: [Azure Functions Python developer guide](https://docs.microsoft.com/en-us/azure/azure-functions/functions-reference-python)
+To setup the infrastructure run the Terraform configuration `main.tf`
 
-Other sources
+```
+terraform plan
+terraform apply
+```
+
+More info at [Authenticating using a Service Principal](https://www.terraform.io/docs/providers/azurerm/guides/service_principal_client_secret.html)
+
+## Sources
+
+[Azure Functions Python developer guide](https://docs.microsoft.com/en-us/azure/azure-functions/functions-reference-python)
 
 [azure-keyvault-keys](https://pypi.org/project/azure-keyvault-keys/)
 
