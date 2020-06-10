@@ -1,3 +1,4 @@
 azure-functions
 pymongo
 azure-keyvault-keys
+azure-identity

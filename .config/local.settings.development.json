@@ -4,6 +4,9 @@
     "FUNCTIONS_WORKER_RUNTIME": "python",
     "AzureWebJobsStorage": "{AzureWebJobsStorage}",
     "COSMOSDB_CONNECTION_STRING": "<CONNECTION_STRING>",
-    "KEYVAULT_URI": "<URI>"
+    "KEYVAULT_URI": "",
+    "AZURE_TENANT_ID": "",
+    "AZURE_CLIENT_ID": "",
+    "AZURE_CLIENT_SECRET": ""
   }
 }
