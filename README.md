@@ -45,7 +45,7 @@ More info at [Authenticating using a Service Principal](https://www.terraform.io
 
 ## Sources
 
-[Azure Functions Python developer guide](https://docs.microsoft.com/en-us/azure/azure-functions/functions-reference-python)
+[Azure Functions Python developer guide](https://docs.microsoft.com/en-us/azure/azure-functions/functions-reference-python) (must read)
 
 [azure-keyvault-keys](https://pypi.org/project/azure-keyvault-keys/)
 
