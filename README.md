@@ -1,16 +1,22 @@
 # mb-prototype
 
+A sample app with serverless functions, NoSQL database, cloud encryption and infrastructure-as-code.
 
 ## Local develompent
-Required: [Azure Functions Core Tools](https://github.com/Azure/azure-functions-core-tools)
 
-Start the functions locally
+_Required:_ [Azure Functions Core Tools](https://github.com/Azure/azure-functions-core-tools) and [Infrastructure](#Infrastructure) setup
+
+Start here
 
 ```sh
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
+. init.sh
+```
 
+Set environment variables in the `local.settings.json`
+
+Start Functions locally
+
+```sh
 func host start
 ```
 
@@ -26,7 +32,7 @@ Post answers
 curl --data "@shared_code/answers.json" http://localhost:7071/api/PostAnswers
 ```
 
-Get anwers
+Get answers
 
 ```sh
 curl http://localhost:7071/api/GetAnswers?id=participant@mail.com
@@ -41,7 +47,7 @@ terraform plan
 terraform apply
 ```
 
-More info at [Authenticating using a Service Principal](https://www.terraform.io/docs/providers/azurerm/guides/service_principal_client_secret.html)
+More info on how to setup Azure connectivity here: [Authenticating using a Service Principal](https://www.terraform.io/docs/providers/azurerm/guides/service_principal_client_secret.html)
 
 ## Sources
 
