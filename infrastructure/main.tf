@@ -42,114 +42,114 @@ resource "azurerm_cosmosdb_mongo_database" "default" {
   throughput          = 400
 }
 
-resource "azurerm_cosmosdb_mongo_collection" "questions" {
-  name                = "questions"
-  resource_group_name = azurerm_resource_group.rg.name
-  account_name        = azurerm_cosmosdb_account.default.name
-  database_name       = azurerm_cosmosdb_mongo_database.default.name
+# resource "azurerm_cosmosdb_mongo_collection" "questions" {
+#   name                = "questions"
+#   resource_group_name = azurerm_resource_group.rg.name
+#   account_name        = azurerm_cosmosdb_account.default.name
+#   database_name       = azurerm_cosmosdb_mongo_database.default.name
 
-  default_ttl_seconds = "0"
-  shard_key           = "product"
-  throughput          = 400
-}
+#   default_ttl_seconds = "0"
+#   shard_key           = "product"
+#   throughput          = 400
+# }
 
-resource "azurerm_cosmosdb_mongo_collection" "answers" {
-  name                = "answers"
-  resource_group_name = azurerm_resource_group.rg.name
-  account_name        = azurerm_cosmosdb_account.default.name
-  database_name       = azurerm_cosmosdb_mongo_database.default.name
+# resource "azurerm_cosmosdb_mongo_collection" "answers" {
+#   name                = "answers"
+#   resource_group_name = azurerm_resource_group.rg.name
+#   account_name        = azurerm_cosmosdb_account.default.name
+#   database_name       = azurerm_cosmosdb_mongo_database.default.name
 
-  default_ttl_seconds = "0"
-  shard_key           = "address.zipcode"
-  throughput          = 400
+#   default_ttl_seconds = "0"
+#   shard_key           = "address.zipcode"
+#   throughput          = 400
 
-  depends_on = [
-    azurerm_cosmosdb_mongo_collection.answers
-  ]
+#   # depends_on = [
+#   #   azurerm_cosmosdb_mongo_collection.answers
+#   # ]
 
-}
+# }
 
 # STORAGE
 
-resource "azurerm_storage_account" "default" {
-  name                     = "stmaibeerprototype001"
-  location                 = azurerm_resource_group.rg.location
-  resource_group_name      = azurerm_resource_group.rg.name
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
-}
+# resource "azurerm_storage_account" "default" {
+#   name                     = "stmaibeerprototype001"
+#   location                 = azurerm_resource_group.rg.location
+#   resource_group_name      = azurerm_resource_group.rg.name
+#   account_tier             = "Standard"
+#   account_replication_type = "LRS"
+# }
 
 # FUNCTIONS
 
-resource "azurerm_app_service_plan" "default" {
-  name                = "plan-maibeer-prototype"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
-  kind                = "FunctionApp"
-  reserved            = true
+# resource "azurerm_app_service_plan" "default" {
+#   name                = "plan-maibeer-prototype"
+#   location            = azurerm_resource_group.rg.location
+#   resource_group_name = azurerm_resource_group.rg.name
+#   kind                = "FunctionApp"
+#   reserved            = true
 
-  sku {
-    tier = "Dynamic"
-    size = "Y1"
-  }
-}
+#   sku {
+#     tier = "Dynamic"
+#     size = "Y1"
+#   }
+# }
 
-resource "azurerm_function_app" "maibeer" {
-  name                       = "func-maibeer-prototype"
-  location                   = azurerm_resource_group.rg.location
-  resource_group_name        = azurerm_resource_group.rg.name
-  app_service_plan_id        = azurerm_app_service_plan.default.id
-  storage_account_name       = azurerm_storage_account.default.name
-  storage_account_access_key = azurerm_storage_account.default.primary_access_key
-  os_type                    = "linux"
+# resource "azurerm_function_app" "maibeer" {
+#   name                       = "func-maibeer-prototype"
+#   location                   = azurerm_resource_group.rg.location
+#   resource_group_name        = azurerm_resource_group.rg.name
+#   app_service_plan_id        = azurerm_app_service_plan.default.id
+#   storage_account_name       = azurerm_storage_account.default.name
+#   storage_account_access_key = azurerm_storage_account.default.primary_access_key
+#   os_type                    = "linux"
 
-  identity {
-    type                     = "SystemAssigned"
-  }
-}
+#   identity {
+#     type                     = "SystemAssigned"
+#   }
+# }
 
 # KEYVAULT
 
-resource "azurerm_key_vault" "prototype" {
-  name                        = "kv-maibeer-prototype"
-  location                    = azurerm_resource_group.rg.location
-  resource_group_name         = azurerm_resource_group.rg.name
-  enabled_for_disk_encryption = false
-  tenant_id                   = data.azurerm_client_config.current.tenant_id
-  soft_delete_enabled         = true
-  purge_protection_enabled    = false
+# resource "azurerm_key_vault" "prototype" {
+#   name                        = "kv-maibeer-prototype"
+#   location                    = azurerm_resource_group.rg.location
+#   resource_group_name         = azurerm_resource_group.rg.name
+#   enabled_for_disk_encryption = false
+#   tenant_id                   = data.azurerm_client_config.current.tenant_id
+#   soft_delete_enabled         = true
+#   purge_protection_enabled    = false
 
-  sku_name = "standard"
+#   sku_name = "standard"
 
-  network_acls {
-    default_action = "Allow"
-    bypass         = "AzureServices"
-  }
+#   network_acls {
+#     default_action = "Allow"
+#     bypass         = "AzureServices"
+#   }
 
-}
+# }
 
-resource "azurerm_key_vault_key" "generated" {
-  name         = "generated-certificate"
-  key_vault_id = azurerm_key_vault.prototype.id
-  key_type     = "RSA"
-  key_size     = 2048
+# resource "azurerm_key_vault_key" "generated" {
+#   name         = "generated-certificate"
+#   key_vault_id = azurerm_key_vault.prototype.id
+#   key_type     = "RSA"
+#   key_size     = 2048
 
-  key_opts = [
-    "decrypt",
-    "encrypt"
-  ]
-}
+#   key_opts = [
+#     "decrypt",
+#     "encrypt"
+#   ]
+# }
 
-resource "azurerm_key_vault_access_policy" "function" {
-  key_vault_id = azurerm_key_vault.prototype.id
+# resource "azurerm_key_vault_access_policy" "function" {
+#   key_vault_id = azurerm_key_vault.prototype.id
 
-  tenant_id = data.azurerm_client_config.current.tenant_id
-  object_id = azurerm_function_app.maibeer.identity[0].principal_id
+#   tenant_id = data.azurerm_client_config.current.tenant_id
+#   object_id = azurerm_function_app.maibeer.identity[0].principal_id
 
-  key_permissions = [
-    "get"
-  ]
-}
+#   key_permissions = [
+#     "get"
+#   ]
+# }
 
 # OUTPUTS
 
