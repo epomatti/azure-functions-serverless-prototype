@@ -168,3 +168,7 @@ output "cosmosdb_connection_strings" {
 output "vault_uri" {
   value = azurerm_key_vault.prototype.vault_uri
 }
+
+output "function_identity" {
+  value = azurerm_function_app.maibeer.identity
+}
