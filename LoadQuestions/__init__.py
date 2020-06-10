@@ -7,7 +7,7 @@ import json
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
 
-    with open(".config/data.json", "r") as file:
+    with open("shared_code/data.json", "r") as file:
         data = file.read()
         with mongo.get_client() as client:
             db = client.get_database("maibeer")
