@@ -54,10 +54,10 @@ To setup the local environment an Application Registration is **required to be c
 
 Procedure:
 
-1. Go to Azure AD and create an Application Registration
-2. Create a `Client Secret` for that app
-3. Add the app credentials to the `local.settings.json` file
-4. Go to the Key Vault and add an `Access Policy` for that application with KEY opertions `Get`, `Decrypt` and `Encrypt`
+1. Create an Application Registration on Azure AD
+2. Create a `Client Secret` for the app
+3. Add the app credentials to `local.settings.json`
+4. In the Key Vault add a `Access Policy` for the app with KEY operations `Get`, `Decrypt` and `Encrypt`
 
 Keep in ming that this will not be tracked by Terraform and it will need to be recreated if `main.tf` is applied to the infrastructure (it will remove the app).
 
