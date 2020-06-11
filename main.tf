@@ -100,6 +100,15 @@ resource "azurerm_function_app" "maibeer" {
   os_type                    = "linux"
   version                    = "~3"
 
+  app_settings {
+    FUNCTIONS_WORKER_RUNTIME  = "python"
+  }
+
+  site_config {
+    # only for free plan
+    use_32_bit_worker_process = true
+  }
+
   identity {
     type                     = "SystemAssigned"
   }
