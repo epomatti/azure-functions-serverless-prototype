@@ -100,8 +100,8 @@ resource "azurerm_function_app" "maibeer" {
   os_type                    = "linux"
   version                    = "~3"
 
-  app_settings {
-    FUNCTIONS_WORKER_RUNTIME  = "python"
+  app_settings = {
+    "FUNCTIONS_WORKER_RUNTIME"  = "python"
   }
 
   site_config {
