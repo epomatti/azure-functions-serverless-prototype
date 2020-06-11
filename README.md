@@ -54,7 +54,7 @@ To setup the local environment an Application Registration is **required to be c
 
 Procedure:
 
-1. Go to Azure AD and create an Applicatoin Registration
+1. Go to Azure AD and create an Application Registration
 2. Create a `Client Secret` for that app
 3. Add the app credentials to the `local.settings.json` file
 4. Go to the Key Vault and add an `Access Policy` for that application with KEY opertions `Get`, `Decrypt` and `Encrypt`
