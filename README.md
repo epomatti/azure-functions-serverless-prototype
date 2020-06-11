@@ -59,6 +59,8 @@ Procedure:
 3. Add the app credentials to the `local.settings.json` file
 4. Go to the Key Vault and add an `Access Policy` for that application with KEY opertions `Get`, `Decrypt` and `Encrypt`
 
+Keep in ming that this will not be tracked by Terraform and it will need to be recreated if `main.tf` is applied to the infrastructure (it will remove the app).
+
 Terraform is declarative, meaning that "if else" is not an option so I'm leaving it manual for now.
 
 ## Sources
