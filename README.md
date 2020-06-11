@@ -40,14 +40,26 @@ curl http://localhost:7071/api/GetAnswers?id=participant@mail.com
 
 ## Infrastructure
 
-To setup the infrastructure run the Terraform configuration `main.tf`
+Create the infrastructure with `main.tf`. More info on how to setup Azure connectivity here: [Authenticating using a Service Principal](https://www.terraform.io/docs/providers/azurerm/guides/service_principal_client_secret.html)
 
 ```
 terraform plan
 terraform apply
 ```
 
-More info on how to setup Azure connectivity here: [Authenticating using a Service Principal](https://www.terraform.io/docs/providers/azurerm/guides/service_principal_client_secret.html)
+### Local Development 
+
+
+To setup the local environment an Application Registration is **required to be created manually**. (I didn't have the time yet to do it by scripts)
+
+Procedure:
+
+1. Go to Azure AD and create an Applicatoin Registration
+2. Create a `Client Secret` for that app
+3. Add the app credentials to the `local.settings.json` file
+4. Go to the Key Vault and add an `Access Policy` for that application with KEY opertions `Get`, `Decrypt` and `Encrypt`
+
+Terraform is declarative, meaning that "if else" is not an option so I'm leaving it manual for now.
 
 ## Sources
 

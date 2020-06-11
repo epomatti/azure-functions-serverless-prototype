@@ -98,6 +98,7 @@ resource "azurerm_function_app" "maibeer" {
   storage_account_name       = azurerm_storage_account.default.name
   storage_account_access_key = azurerm_storage_account.default.primary_access_key
   os_type                    = "linux"
+  version                    = "~3"
 
   identity {
     type                     = "SystemAssigned"
