@@ -49,19 +49,26 @@ terraform apply
 
 ### Local Development 
 
-
-To setup the local environment an Application Registration is **required to be created manually**. (I didn't have the time yet to do it by scripts)
+To setup the local environment create an Application Registration manually. (I didn't have the time to automate)
 
 Procedure:
 
-1. Create an Application Registration on Azure AD
+1. Create an Application Registration in Azure AD
 2. Create a `Client Secret` for the app
 3. Add the app credentials to `local.settings.json`
 4. In the Key Vault add a `Access Policy` for the app with KEY operations `Get`, `Decrypt` and `Encrypt`
 
 Keep in ming that this will not be tracked by Terraform and it will need to be recreated if `main.tf` is applied to the infrastructure (it will remove the app).
 
-Terraform is declarative, meaning that "if else" is not an option so I'm leaving it manual for now.
+Terraform is declarative, meaning that "if else" is not an option so I'm leaving it manual for now. For real use cases this has to be added as extra configuration to Terraform.
+
+## Cloud Deployment
+
+The easiest way to test your app in the Cloud is using the [IDE plugin](https://docs.microsoft.com/en-us/azure/app-service/deploy-local-git) to perform the deployment.
+
+Using VS Code Azure plugin, select the Function and deploy.
+
+File `local.settings.json` is not deployed to the cloud. You need to set those variables in the `Configuration` blade and `App Settings` tab.
 
 ## Sources
 
