@@ -1,0 +1,17 @@
+# group
+resource_group_name: "maibeer"
+location: "brazilsouth"
+
+# cosmos
+cosmos_account_name: "cosmos-maibeer-prot"
+cosmos_prevent_destroy: false
+
+# storage
+storage_name: "stmaibeerprot001"
+
+# functions
+func_plan_name: "plan-maibeer-prot"
+func_app_name: "func-maibeer-prot"
+
+# keyvault
+kv_name: "kv-maibeer-prot"

@@ -8,15 +8,22 @@ provider "azurerm" {
 
 data "azurerm_client_config" "current" {}
 
+# Configuration files
+locals {
+  env = merge(
+    yamldecode(file("main.development.yaml"))
+  )
+}
+
 resource "azurerm_resource_group" "rg" {
-  name     = "maibeer"
-  location = "brazilsouth"
+  name     = local.env.resource_group_name
+  location = local.env.location
 }
 
 # COSMOS
 
 resource "azurerm_cosmosdb_account" "default" {
-  name                = "cosmos-maibeer-prototype"
+  name                = local.env.cosmos_account_name
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   offer_type          = "Standard"
@@ -33,6 +40,10 @@ resource "azurerm_cosmosdb_account" "default" {
     failover_priority = 0
   }
 
+  lifecycle {
+      prevent_destroy = local.env.cosmos_prevent_destroy
+  }
+
 }
 
 resource "azurerm_cosmosdb_mongo_database" "default" {
@@ -40,6 +51,10 @@ resource "azurerm_cosmosdb_mongo_database" "default" {
   resource_group_name = azurerm_resource_group.rg.name
   account_name        = azurerm_cosmosdb_account.default.name
   throughput          = 400
+
+  lifecycle {
+      prevent_destroy = local.env.cosmos_prevent_destroy
+  }
 }
 
 resource "azurerm_cosmosdb_mongo_collection" "questions" {
@@ -51,6 +66,11 @@ resource "azurerm_cosmosdb_mongo_collection" "questions" {
   default_ttl_seconds = "0"
   shard_key           = "product"
   throughput          = 400
+
+  lifecycle {
+      prevent_destroy = local.env.cosmos_prevent_destroy
+  }
+
 }
 
 resource "azurerm_cosmosdb_mongo_collection" "answers" {
@@ -63,12 +83,16 @@ resource "azurerm_cosmosdb_mongo_collection" "answers" {
   shard_key           = "address.zipcode"
   throughput          = 400
 
+  lifecycle {
+      prevent_destroy = local.env.cosmos_prevent_destroy
+  }
+
 }
 
 # STORAGE
 
 resource "azurerm_storage_account" "default" {
-  name                     = "stmaibeerprototype001"
+  name                     = local.env.storage_name
   location                 = azurerm_resource_group.rg.location
   resource_group_name      = azurerm_resource_group.rg.name
   account_tier             = "Standard"
@@ -78,7 +102,7 @@ resource "azurerm_storage_account" "default" {
 # FUNCTIONS
 
 resource "azurerm_app_service_plan" "default" {
-  name                = "plan-maibeer-prototype"
+  name                = local.env.func_plan_name
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   kind                = "FunctionApp"
@@ -91,7 +115,7 @@ resource "azurerm_app_service_plan" "default" {
 }
 
 resource "azurerm_function_app" "maibeer" {
-  name                       = "func-maibeer-prototype"
+  name                       = local.env.func_app_name
   location                   = azurerm_resource_group.rg.location
   resource_group_name        = azurerm_resource_group.rg.name
   app_service_plan_id        = azurerm_app_service_plan.default.id
@@ -117,7 +141,7 @@ resource "azurerm_function_app" "maibeer" {
 # KEYVAULT
 
 resource "azurerm_key_vault" "prototype" {
-  name                        = "kv-maibeer-prototype"
+  name                        = local.env.kv_name
   location                    = azurerm_resource_group.rg.location
   resource_group_name         = azurerm_resource_group.rg.name
   enabled_for_disk_encryption = false
