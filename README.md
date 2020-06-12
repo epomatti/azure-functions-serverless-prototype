@@ -70,6 +70,8 @@ Using VS Code Azure plugin, select the Function and deploy.
 
 File `local.settings.json` is not deployed to the cloud. You need to set those variables in the `Configuration` blade and `App Settings` tab.
 
+Checkout the [Deploy](https://docs.microsoft.com/en-us/azure/azure-functions/functions-how-to-azure-devops?tabs=csharp) blade options to automate your deployment.
+
 ## Sources
 
 [Azure Functions Python developer guide](https://docs.microsoft.com/en-us/azure/azure-functions/functions-reference-python) (must read)
