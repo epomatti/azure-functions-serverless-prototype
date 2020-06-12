@@ -1,6 +1,10 @@
 # mb-prototype
 
-A sample app with serverless functions, NoSQL database, cloud encryption and infrastructure-as-code.
+A serverless app testing a couple of cloud services working togueter:
+- Serverless - Azure Functions with a consumption plan
+- NoSQL - CosmosDB with a MongoDB interface
+- Cloud security - Azure Key Vault to encrypt and decrypt sensitive data
+- Infrastructure-as-code - Terraform
 
 ## Local develompent
 
