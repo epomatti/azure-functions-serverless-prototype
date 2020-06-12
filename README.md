@@ -70,7 +70,7 @@ Terraform is declarative, meaning that "if else" is not an option so I'm leaving
 
 The easiest way to test your app in the Cloud is using the [IDE plugin](https://docs.microsoft.com/en-us/azure/app-service/deploy-local-git) to perform the deployment.
 
-Using VS Code Azure plugin, select the Function and deploy.
+Using VS Code Azure plugin, select the Function and deploy. For a step-by-step check it [here](https://github.com/microsoft/vscode-azurefunctions).
 
 File `local.settings.json` is not deployed to the cloud. You need to set those variables in the `Configuration` blade and `App Settings` tab.
 
