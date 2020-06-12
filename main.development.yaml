@@ -4,7 +4,6 @@ location: "brazilsouth"
 
 # cosmos
 cosmos_account_name: "cosmos-maibeer-prot"
-cosmos_prevent_destroy: false
 
 # storage
 storage_name: "stmaibeerprot001"

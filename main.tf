@@ -41,7 +41,7 @@ resource "azurerm_cosmosdb_account" "default" {
   }
 
   lifecycle {
-      prevent_destroy = local.env.cosmos_prevent_destroy
+      prevent_destroy = true
   }
 
 }
@@ -53,7 +53,7 @@ resource "azurerm_cosmosdb_mongo_database" "default" {
   throughput          = 400
 
   lifecycle {
-      prevent_destroy = local.env.cosmos_prevent_destroy
+      prevent_destroy = true
   }
 }
 
@@ -68,7 +68,7 @@ resource "azurerm_cosmosdb_mongo_collection" "questions" {
   throughput          = 400
 
   lifecycle {
-      prevent_destroy = local.env.cosmos_prevent_destroy
+      prevent_destroy = true
   }
 
 }
@@ -84,7 +84,7 @@ resource "azurerm_cosmosdb_mongo_collection" "answers" {
   throughput          = 400
 
   lifecycle {
-      prevent_destroy = local.env.cosmos_prevent_destroy
+      prevent_destroy = true
   }
 
 }
