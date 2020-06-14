@@ -59,8 +59,6 @@ terraform apply
 
 To setup the local environment create an Application Registration manually. (I didn't have the time to automate)
 
-Procedure:
-
 1. Create an Application Registration in Azure AD
 2. Create a `Client Secret` for the app
 3. Add the app credentials to `local.settings.json`
@@ -72,18 +70,16 @@ Terraform is declarative, meaning that "if else" is not an option so I'm leaving
 
 ## Cloud Deployment
 
-The easiest way to test your app in the Cloud is using the [IDE plugin](https://docs.microsoft.com/en-us/azure/app-service/deploy-local-git) to perform the deployment.
+The easiest way to test your app in the Cloud is using the [IDE plugin](https://docs.microsoft.com/en-us/azure/app-service/deploy-local-git) to perform the deployment. Using VS Code Azure plugin*, select the Function and deploy. For a step-by-step check it [here](https://github.com/microsoft/vscode-azurefunctions).
 
-Using VS Code Azure plugin, select the Function and deploy. For a step-by-step check it [here](https://github.com/microsoft/vscode-azurefunctions).
+File `local.settings.json` is not deployed to the cloud. You need to set those variables in the `Configuration` blade and `App Settings` tab. Checkout the [Deploy](https://docs.microsoft.com/en-us/azure/azure-functions/functions-how-to-azure-devops?tabs=csharp) blade options to automate your deployment.
 
-File `local.settings.json` is not deployed to the cloud. You need to set those variables in the `Configuration` blade and `App Settings` tab.
-
-Checkout the [Deploy](https://docs.microsoft.com/en-us/azure/azure-functions/functions-how-to-azure-devops?tabs=csharp) blade options to automate your deployment.
+_*Current issue [#2108](https://github.com/microsoft/vscode-azurefunctions/issues/2108) will not allow deployment with WSL until fixed._
 
 ## Sources
 
 [Azure Functions Python developer guide](https://docs.microsoft.com/en-us/azure/azure-functions/functions-reference-python) (must read)
 
-[azure-keyvault-keys](https://pypi.org/project/azure-keyvault-keys/)
+[Azure KeyVault Keys - Python SDK](https://pypi.org/project/azure-keyvault-keys/)
 
-[azure-identity](https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/identity/azure-identity)
+[Azure Identity - Python SDK](https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/identity/azure-identity)
