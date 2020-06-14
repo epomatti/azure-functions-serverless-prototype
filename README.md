@@ -1,10 +1,14 @@
 # mb-prototype
 
-A serverless app testing a couple of cloud services working togueter:
+Putting some technologies together as a prototype for my next project.
+
 - Serverless - Azure Functions with a consumption plan
 - NoSQL - CosmosDB with a MongoDB interface
-- Cloud security - Azure Key Vault to encrypt and decrypt sensitive data
+- Cloud security - Azure Key Vault to encrypt and decrypt sensitive data, as well for getting secrets
 - Infrastructure-as-code - Terraform
+
+<img src="diagram.png" />
+
 
 ## Local develompent
 
