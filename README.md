@@ -1,4 +1,4 @@
-# mb-prototype
+# Serverless prototype
 
 Putting some technologies together as a prototype for my next project.
 
