@@ -1,16 +1,16 @@
 # group
-resource_group_name: "maibeer"
-location: "brazilsouth"
+resource_group_name: "rg-myproj888"
+location: "eastus"
 
 # cosmos
-cosmos_account_name: "cosmos-maibeer-prot"
+cosmos_account_name: "cosmos-myproj888"
 
 # storage
-storage_name: "stmaibeerprot001"
+storage_name: "stmyproj888"
 
 # functions
-func_plan_name: "plan-maibeer-prot"
-func_app_name: "func-maibeer-prot"
+func_plan_name: "plan-myproj888"
+func_app_name: "func-myproj888"
 
 # keyvault
-kv_name: "kv-maibeer-prot"
+kv_name: "kv-myproj888"

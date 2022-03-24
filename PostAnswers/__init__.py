@@ -11,7 +11,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     encrypted_email = keyvault.encrypt(obj["email"])
     obj["email"] = encrypted_email
     with mongo.get_client() as client:
-        db = client.get_database("maibeer")
+        db = client.get_database("myproj888")
         collection = db.get_collection("answers")
         collection.insert_one(obj)
     #plain_email = keyvault.decrypt(safe_email)

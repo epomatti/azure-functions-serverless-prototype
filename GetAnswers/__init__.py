@@ -8,7 +8,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     participant_id = req.params.get('id')
     hash_id = hasher.digest(participant_id)
     with mongo.get_client() as client:
-        db = client.get_database("maibeer")
+        db = client.get_database("myproj888")
         obj = db.answers.find_one({"_id": hash_id})
         plain_email = keyvault.decrypt(obj["email"])
     return func.HttpResponse(plain_email)

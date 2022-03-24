@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "=3.0.1"
+    }
+  }
+}
+
 provider "azurerm" {
   features {
     key_vault {
@@ -41,19 +50,19 @@ resource "azurerm_cosmosdb_account" "default" {
   }
 
   lifecycle {
-      prevent_destroy = true
+    prevent_destroy = true
   }
 
 }
 
 resource "azurerm_cosmosdb_mongo_database" "default" {
-  name                = "maibeer"
+  name                = "myproj888"
   resource_group_name = azurerm_resource_group.rg.name
   account_name        = azurerm_cosmosdb_account.default.name
   throughput          = 400
 
   lifecycle {
-      prevent_destroy = true
+    prevent_destroy = true
   }
 }
 
@@ -63,12 +72,16 @@ resource "azurerm_cosmosdb_mongo_collection" "questions" {
   account_name        = azurerm_cosmosdb_account.default.name
   database_name       = azurerm_cosmosdb_mongo_database.default.name
 
-  default_ttl_seconds = "0"
-  shard_key           = "product"
-  throughput          = 400
+  shard_key  = "product"
+  throughput = 400
+
+  index {
+    keys   = ["_id"]
+    unique = true
+  }
 
   lifecycle {
-      prevent_destroy = true
+    prevent_destroy = true
   }
 
 }
@@ -79,12 +92,16 @@ resource "azurerm_cosmosdb_mongo_collection" "answers" {
   account_name        = azurerm_cosmosdb_account.default.name
   database_name       = azurerm_cosmosdb_mongo_database.default.name
 
-  default_ttl_seconds = "0"
-  shard_key           = "address.zipcode"
-  throughput          = 400
+  shard_key  = "address.zipcode"
+  throughput = 400
+
+  index {
+    keys   = ["_id"]
+    unique = true
+  }
 
   lifecycle {
-      prevent_destroy = true
+    prevent_destroy = true
   }
 
 }
@@ -101,40 +118,34 @@ resource "azurerm_storage_account" "default" {
 
 # FUNCTIONS
 
-resource "azurerm_app_service_plan" "default" {
+resource "azurerm_service_plan" "default" {
   name                = local.env.func_plan_name
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  kind                = "FunctionApp"
-  reserved            = true
-
-  sku {
-    tier = "Dynamic"
-    size = "Y1"
-  }
+  os_type             = "Linux"
+  sku_name            = "Y1"
 }
 
-resource "azurerm_function_app" "maibeer" {
+resource "azurerm_linux_function_app" "myproj888" {
   name                       = local.env.func_app_name
-  location                   = azurerm_resource_group.rg.location
   resource_group_name        = azurerm_resource_group.rg.name
-  app_service_plan_id        = azurerm_app_service_plan.default.id
+  location                   = azurerm_resource_group.rg.location
   storage_account_name       = azurerm_storage_account.default.name
   storage_account_access_key = azurerm_storage_account.default.primary_access_key
-  os_type                    = "linux"
-  version                    = "~3"
+
+  service_plan_id = azurerm_service_plan.default.id
 
   app_settings = {
-    "FUNCTIONS_WORKER_RUNTIME"  = "python"
+    "FUNCTIONS_WORKER_RUNTIME" = "python"
   }
 
   site_config {
     # only for free plan
-    use_32_bit_worker_process = true
+    use_32_bit_worker = true
   }
 
   identity {
-    type                     = "SystemAssigned"
+    type = "SystemAssigned"
   }
 }
 
@@ -146,7 +157,6 @@ resource "azurerm_key_vault" "prototype" {
   resource_group_name         = azurerm_resource_group.rg.name
   enabled_for_disk_encryption = false
   tenant_id                   = data.azurerm_client_config.current.tenant_id
-  soft_delete_enabled         = true
   purge_protection_enabled    = false
 
   sku_name = "standard"
@@ -161,13 +171,12 @@ resource "azurerm_key_vault" "prototype" {
     object_id = data.azurerm_client_config.current.object_id
 
     key_permissions = [
-      "get",
-      "create",
-      "delete",
-      "update"
+      "Get",
+      "Create",
+      "Delete",
+      "Update"
     ]
   }
-
 }
 
 resource "azurerm_key_vault_key" "generated" {
@@ -186,12 +195,12 @@ resource "azurerm_key_vault_access_policy" "function" {
   key_vault_id = azurerm_key_vault.prototype.id
 
   tenant_id = data.azurerm_client_config.current.tenant_id
-  object_id = azurerm_function_app.maibeer.identity[0].principal_id
+  object_id = azurerm_linux_function_app.myproj888.identity[0].principal_id
 
   key_permissions = [
-    "get",
-    "decrypt",
-    "encrypt"
+    "Get",
+    "Decrypt",
+    "Encrypt"
   ]
 }
 
@@ -199,6 +208,7 @@ resource "azurerm_key_vault_access_policy" "function" {
 
 output "cosmosdb_connection_strings" {
   value = azurerm_cosmosdb_account.default.connection_strings
+  sensitive = true
 }
 
 output "vault_uri" {
@@ -206,5 +216,5 @@ output "vault_uri" {
 }
 
 output "function_identity" {
-  value = azurerm_function_app.maibeer.identity
+  value = azurerm_linux_function_app.myproj888.identity
 }
