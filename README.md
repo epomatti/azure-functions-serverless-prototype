@@ -1,5 +1,7 @@
 # Azure Functions - Terraform Prototype
 
+[![Azure Function App](https://github.com/epomatti/azure-functions-serverless-prototype/actions/workflows/python-app.yml/badge.svg)](https://github.com/epomatti/azure-functions-serverless-prototype/actions/workflows/python-app.yml)
+
 Putting some technologies together as a prototype for my next project.
 
 - **Serverless** - Azure Functions with a consumption plan
