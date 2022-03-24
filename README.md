@@ -2,10 +2,10 @@
 
 Putting some technologies together as a prototype for my next project.
 
-- Serverless - Azure Functions with a consumption plan
-- NoSQL - CosmosDB with a MongoDB interface
-- Cloud security - Azure Key Vault to encrypt and decrypt sensitive data, as well for getting secrets
-- Infrastructure-as-code - Terraform
+- **Serverless** - Azure Functions with a consumption plan
+- **NoSQL** - CosmosDB with a MongoDB interface
+- **Cloud security** - Azure Key Vault to encrypt and decrypt sensitive data, as well for getting secrets
+- **Infrastructure-as-code** - Terraform
 
 <img src=".docs/solution.png" width=350/>
 
